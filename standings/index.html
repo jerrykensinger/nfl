@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Standings · NFL Picks League</title>
+  <meta name="description" content="NFL picks league season standings, this week's live table, and completed weekly records.">
+  <meta name="theme-color" content="#f5f5f7" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0b0b0c" media="(prefers-color-scheme: dark)">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Standings · NFL Picks League">
+  <meta property="og:description" content="NFL picks league season standings, this week's live table, and completed weekly records.">
+  <meta property="og:url" content="https://nfl.jerrykensinger.com/standings/">
+  <meta property="og:image" content="https://jerrykensinger.com/og-image.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="canonical" href="https://nfl.jerrykensinger.com/standings/">
+  <link rel="icon" href="https://jerrykensinger.com/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="https://jerrykensinger.com/apple-touch-icon.png">
+  <link rel="manifest" href="https://jerrykensinger.com/site.webmanifest">
+  <script>try{var t=localStorage.getItem('jk-theme')||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');document.documentElement.dataset.theme=t;}catch(e){}</script>
+  <link rel="stylesheet" href="https://jerrykensinger.com/style.css">
+  <link rel="stylesheet" href="/assets/league.css?v=20261024-app">
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-EJ8CPRPSRB"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-EJ8CPRPSRB');
+  </script>
+</head>
+<body data-page="standings">
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="league-topbar">
+    <a class="league-brand" href="/"><span aria-hidden="true">🏈</span> NFL Picks League</a>
+    <nav class="league-nav" aria-label="League pages">
+      <a href="/"><span class="nav-ico" aria-hidden="true">⌂</span><span>Home</span></a>
+      <a href="/games/"><span class="nav-ico" aria-hidden="true">🏈</span><span>Games</span></a>
+      <a href="/standings/" aria-current="page"><span class="nav-ico" aria-hidden="true">🏆</span><span>Standings</span></a>
+      <a href="/history/"><span class="nav-ico" aria-hidden="true">📊</span><span>History</span></a>
+    </nav>
+    <button class="theme-toggle" type="button" aria-label="Switch color theme" title="Switch color theme">
+      <span class="theme-icon" aria-hidden="true">◐</span>
+    </button>
+  </header>
+
+  <main id="main" class="league section">
+    <p class="eyebrow" id="league-eyebrow">NFL Picks League</p>
+    <div class="league-title"><div><h1>Standings</h1><p>The season race and this week’s live table.</p></div><span class="league-badge" id="league-badge">Loading results…</span></div>
+    <p class="league-updated" id="league-updated">Loading live league data…</p>
+    <div class="seg" role="tablist" aria-label="Standings view">
+      <button type="button" role="tab" id="tab-season" data-tab="season" aria-controls="panel-season" aria-selected="true">Season</button>
+      <button type="button" role="tab" id="tab-week" data-tab="week" aria-controls="panel-week" aria-selected="false" tabindex="-1">This week</button>
+    </div>
+    <section class="panel" id="panel-season" role="tabpanel" aria-labelledby="tab-season" tabindex="0">
+      <h2 class="sr-only">Season standings</h2>
+      <p id="season-sub">Loading season standings…</p>
+      <div class="league-scroll"><table><caption class="sr-only">Season standings</caption><thead><tr><th scope="col"><span class="lbl-long">Rank</span><span class="lbl-short" aria-hidden="true">#</span></th><th scope="col">Player</th><th scope="col" class="num"><span class="lbl-long">Correct</span><span class="lbl-short" aria-hidden="true">✓</span></th><th scope="col" class="num"><span class="lbl-long">Wrong</span><span class="lbl-short" aria-hidden="true">✕</span></th><th scope="col" class="num"><span class="lbl-long">Win %</span><span class="lbl-short" aria-hidden="true">%</span></th><th scope="col" class="num"><span class="lbl-long">Weekly wins</span><span class="lbl-short" aria-hidden="true">🏆</span></th></tr></thead><tbody id="season-body"><tr><td colspan="6">Loading live data…</td></tr></tbody></table></div>
+      <p class="legend mobile-legend">✓ correct · ✕ wrong · 🏆 weekly wins</p>
+    </section>
+    <section class="panel" id="panel-week" role="tabpanel" aria-labelledby="tab-week" tabindex="0" hidden>
+      <h2 class="sr-only"><span data-week>This week</span> standings</h2>
+      <p id="weekly-sub">Loading weekly standings…</p>
+      <div class="league-scroll"><table><caption class="sr-only">This week's standings</caption><thead><tr><th scope="col"><span class="lbl-long">Rank</span><span class="lbl-short" aria-hidden="true">#</span></th><th scope="col">Player</th><th scope="col" class="num"><span class="lbl-long">Correct</span><span class="lbl-short" aria-hidden="true">✓</span></th><th scope="col" class="num"><span class="lbl-long">Wrong</span><span class="lbl-short" aria-hidden="true">✕</span></th><th scope="col" class="num"><span class="lbl-long">No pick</span><span class="lbl-short" aria-hidden="true">NP</span></th><th scope="col" class="num"><span class="lbl-long">Win %</span><span class="lbl-short" aria-hidden="true">%</span></th></tr></thead><tbody id="weekly-body"><tr><td colspan="6">Loading live data…</td></tr></tbody></table></div>
+      <p class="legend mobile-legend">✓ correct · ✕ wrong · NP no pick</p>
+      <p id="weekly-winner" aria-live="polite"></p>
+    </section>
+    <details class="records" id="completed-weekly">
+      <summary id="completed-weekly-summary"><span>Completed weekly records</span><small></small></summary>
+      <div class="league-scroll" tabindex="0" role="region" aria-label="Completed weekly records"><table><caption class="sr-only">Completed weekly records</caption><thead><tr id="completed-weekly-head"><th scope="col">Rank</th><th scope="col">Player</th></tr></thead><tbody id="completed-weekly-body"><tr><td colspan="2">Loading completed weekly records…</td></tr></tbody></table></div>
+      <p id="completed-weekly-note">Completed weekly records update automatically from the league archive.</p>
+    </details>
+    <p class="league-note">Standings refresh automatically every five minutes. NFL ties are pushes and count as neither correct nor wrong.</p>
+  </main>
+
+  <noscript><p class="league-note section">Enable JavaScript to see current picks, results, and standings.</p></noscript>
+  <script src="https://jerrykensinger.com/script.js"></script>
+  <script src="/assets/league-core.js?v=20261024-app"></script>
+  <script src="/assets/standings.js?v=20261024-app"></script>
+</body>
+</html>
