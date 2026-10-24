@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>History · NFL Picks League</title>
+  <meta name="description" content="NFL picks league record book: champions, weekly winners, and historic picks.">
+  <meta name="theme-color" content="#f5f5f7" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0b0b0c" media="(prefers-color-scheme: dark)">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="History · NFL Picks League">
+  <meta property="og:description" content="NFL picks league record book: champions, weekly winners, and historic picks.">
+  <meta property="og:url" content="https://nfl.jerrykensinger.com/history/">
+  <meta property="og:image" content="https://jerrykensinger.com/og-image.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="canonical" href="https://nfl.jerrykensinger.com/history/">
+  <link rel="icon" href="https://jerrykensinger.com/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="https://jerrykensinger.com/apple-touch-icon.png">
+  <link rel="manifest" href="https://jerrykensinger.com/site.webmanifest">
+  <script>try{var t=localStorage.getItem('jk-theme')||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');document.documentElement.dataset.theme=t;}catch(e){}</script>
+  <link rel="stylesheet" href="https://jerrykensinger.com/style.css">
+  <link rel="stylesheet" href="/assets/league.css?v=20261024-app">
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-EJ8CPRPSRB"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-EJ8CPRPSRB');
+  </script>
+</head>
+<body data-page="history">
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="league-topbar">
+    <a class="league-brand" href="/"><span aria-hidden="true">🏈</span> NFL Picks League</a>
+    <nav class="league-nav" aria-label="League pages">
+      <a href="/"><span class="nav-ico" aria-hidden="true">⌂</span><span>Home</span></a>
+      <a href="/games/"><span class="nav-ico" aria-hidden="true">🏈</span><span>Games</span></a>
+      <a href="/standings/"><span class="nav-ico" aria-hidden="true">🏆</span><span>Standings</span></a>
+      <a href="/history/" aria-current="page"><span class="nav-ico" aria-hidden="true">📊</span><span>History</span></a>
+    </nav>
+    <button class="theme-toggle" type="button" aria-label="Switch color theme" title="Switch color theme">
+      <span class="theme-icon" aria-hidden="true">◐</span>
+    </button>
+  </header>
+
+  <main id="main" class="league section">
+    <p class="eyebrow">NFL Picks League · Record book</p>
+    <div class="league-title"><div><h1>League history</h1><p id="history-sub">Champions, weekly winners, records, and picks nobody saw coming.</p></div></div>
+    <p class="league-updated" id="league-updated">Loading league archive…</p>
+    <label class="history-filter">Explore season
+      <select id="history-year-filter">
+        <option value="all">All seasons</option>
+        <option value="2026">2026 (current)</option>
+        <option value="2025">2025</option>
+        <option value="2024">2024</option>
+        <option value="2023">2023</option>
+      </select>
+    </label>
+    <div class="history-stat-grid" id="history-kpis" aria-label="League records" aria-live="polite">
+      <article class="history-stat"><span>Most weekly wins</span><strong>Loading…</strong><small>&nbsp;</small></article>
+      <article class="history-stat"><span>Best single week</span><strong>Loading…</strong><small>&nbsp;</small></article>
+      <article class="history-stat"><span>Nobody called it</span><strong>Loading…</strong><small>&nbsp;</small></article>
+      <article class="history-stat"><span>Only one called it</span><strong>Loading…</strong><small>&nbsp;</small></article>
+    </div>
+    <article class="history-panel history-champions">
+      <h2 class="h3">🏅 Season champions</h2>
+      <p>Full 18-week seasons have verified champions. Incomplete seasons are clearly marked.</p>
+      <div class="league-scroll"><table><caption class="sr-only">Season leaders by correct picks</caption><thead><tr><th scope="col">Season</th><th scope="col">Leader</th><th scope="col" class="num">Correct</th></tr></thead><tbody id="history-champions"><tr><td colspan="3">Checking historical seasons…</td></tr></tbody></table></div>
+    </article>
+    <div class="history-columns">
+      <article class="history-panel">
+        <h2 class="h3">🥇 Most weekly wins</h2>
+        <p>Shared wins count for every tied winner.</p>
+        <div class="league-scroll"><table><caption class="sr-only">Weekly wins by player</caption><thead><tr><th scope="col">Rank</th><th scope="col">Player</th><th scope="col" class="num">Wins</th></tr></thead><tbody id="history-win-leaders"><tr><td colspan="3">Loading…</td></tr></tbody></table></div>
+      </article>
+      <article class="history-panel">
+        <h2 class="h3">📈 Season storylines</h2>
+        <p>Best weeks, streaks, against-the-crowd calls, and unanimous picks.</p>
+        <ul id="history-storylines" class="history-stories"><li>Reviewing past games…</li></ul>
+      </article>
+    </div>
+    <article class="history-panel">
+      <h2 class="h3">🏆 Weekly winners</h2>
+      <p>Every completed week, newest first.</p>
+      <div class="league-scroll"><table><caption class="sr-only">Weekly winners in completed weeks</caption><thead><tr><th scope="col">Week</th><th scope="col">Winner(s)</th><th scope="col" class="num">Record</th></tr></thead><tbody id="history-winners"><tr><td colspan="3">Loading completed weeks…</td></tr></tbody></table></div>
+    </article>
+    <div class="history-columns">
+      <article class="history-panel">
+        <h2 class="h3">😲 Biggest stunners</h2>
+        <p>Completed matchups where no submitted pick was correct.</p>
+        <ul id="history-stunners" class="history-games"><li>Checking archived matchups…</li></ul>
+      </article>
+      <article class="history-panel">
+        <h2 class="h3">🎯 Lone-wolf picks</h2>
+        <p>Just one player called the winner.</p>
+        <ul id="history-lone-picks" class="history-games"><li>Checking archived matchups…</li></ul>
+      </article>
+    </div>
+    <p class="history-footnote" id="history-footnote">Records count completed league weeks only. NFL ties are pushes, not wins or losses.</p>
+  </main>
+
+  <noscript><p class="league-note section">Enable JavaScript to see current picks, results, and standings.</p></noscript>
+  <script src="https://jerrykensinger.com/script.js"></script>
+  <script src="/assets/league-core.js?v=20261024-app"></script>
+  <script src="/assets/history.js?v=20261024-app"></script>
+</body>
+</html>
