@@ -21,12 +21,17 @@
     const total = +meta.games_total || 0, fin = +meta.games_final || 0;
     const remaining = Math.max(0, total - fin);
 
-    const season = [...d.season].sort((a, b) => (+a.rank || 99) - (+b.rank || 99));
+    // The feed never repeats a rank, so ties for 1st are found by record.
+    const season = [...d.season].sort((a, b) =>
+      (+b.correct || 0) - (+a.correct || 0) || (+a.wrong || 0) - (+b.wrong || 0) ||
+      (+a.rank || 99) - (+b.rank || 99));
     if (season.length) {
-      const topRank = +season[0].rank || 1;
-      const tops = season.filter(p => (+p.rank || 99) === topRank);
-      card('card-season-leader', 'Season leader', tops.map(p => p.player).join(' & '),
-        `${season[0].correct} correct · ${season[0].wrong} wrong · ${season[0].win_pct}%`);
+      const top = season[0];
+      const tops = season.filter(p => (+p.correct || 0) === (+top.correct || 0) &&
+        (+p.wrong || 0) === (+top.wrong || 0));
+      card('card-season-leader', tops.length > 1 ? 'Season leaders' : 'Season leader',
+        listJoin(tops.map(p => p.player)),
+        `${top.correct} correct · ${top.wrong} wrong · ${top.win_pct}%${tops.length > 1 ? ' each' : ''}`);
     } else {
       card('card-season-leader', 'Season leader', 'No standings yet', 'Season standings appear after Week 1.');
     }
