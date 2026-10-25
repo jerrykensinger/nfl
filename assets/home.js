@@ -1,7 +1,7 @@
 /* home.js — glanceable league dashboard (nfl.jerrykensinger.com/) */
 (() => {
   'use strict';
-  const { $, el, plural, listJoin } = NFL;
+  const { $, el, plural, listJoin, messageRow, rankRows } = NFL;
 
   // Links from the old single-page layout (/#season etc.) go to their new home.
   const moved = { '#games': '/games/', '#season': '/standings/', '#weekly': '/standings/#week',
@@ -78,6 +78,46 @@
     }
   }
 
+  // Live standings appear only once every player has all picks in. They show
+  // win/loss counts from the feed's standings tabs, never individual picks.
+  function renderLive(d) {
+    const section = $('live-standings');
+    if (!section) return;
+    const rows = d.submission;
+    const allIn = rows.length > 0 && rows.every(r => r.status === 'COMPLETE');
+    section.hidden = !allIn;
+    if (!allIn) return;
+
+    const meta = d.meta;
+    const body = $('live-body');
+    // Equal season records share a rank.
+    const season = rankRows([...d.season].sort((a, b) =>
+      (+b.correct || 0) - (+a.correct || 0) || (+a.wrong || 0) - (+b.wrong || 0) ||
+      (+a.rank || 99) - (+b.rank || 99)), p => `${+p.correct || 0}-${+p.wrong || 0}`);
+    if (!season.length) return messageRow(body, 'Season standings appear after the first completed week.', 5);
+
+    const week = new Map(d.weekly.map(p => [String(p.player), p]));
+    const lead = +season[0].correct || 0;
+    body.replaceChildren();
+    season.forEach(p => {
+      const tr = el('tr', null, p._rank === 1 ? 'is-leader' : '');
+      tr.append(el('td', p._rank, 'num rank'));
+      const th = el('th', p.player); th.scope = 'row'; tr.append(th);
+      tr.append(el('td', `${+p.correct || 0}–${+p.wrong || 0}`, 'num'));
+      const back = lead - (+p.correct || 0);
+      tr.append(el('td', back ? String(back) : '—', 'num'));
+      const w = week.get(String(p.player));
+      tr.append(el('td', w ? `${+w.correct || 0}–${+w.wrong || 0}` : '—', 'num'));
+      body.append(tr);
+    });
+
+    const total = +meta.games_total || 0, scored = +meta.games_scored || 0;
+    $('live-sub').textContent = (scored
+      ? `Season totals include ${scored} of ${plural(total, 'game')} scored so far in Week ${meta.week}.`
+      : `No Week ${meta.week} games are final yet; season totals cover completed weeks.`) +
+      ' Updates every five minutes.';
+  }
+
   function renderLinks(d) {
     const g = $('link-games-title');
     if (g) g.textContent = `View Week ${d.meta.week} games`;
@@ -91,7 +131,7 @@
 
   NFL.start({
     needs: { feed: true },
-    render(d) { renderCards(d); renderPicks(d); renderLinks(d); },
+    render(d) { renderCards(d); renderPicks(d); renderLive(d); renderLinks(d); },
     renderError() {
       ['card-season-leader', 'card-week-leaders', 'card-pending'].forEach(id =>
         card(id, null, 'Unavailable', 'Retrying automatically.'));
