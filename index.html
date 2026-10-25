@@ -59,6 +59,12 @@
       <div class="progress" id="picks-bar" role="progressbar" aria-labelledby="picks-label" aria-valuemin="0" aria-valuemax="10" aria-valuenow="0"><span></span></div>
       <p id="picks-detail">Counts update automatically. Individual team picks are never shown here.</p>
     </section>
+    <section id="live-standings" aria-labelledby="live-title" hidden>
+      <h2 id="live-title">Live standings</h2>
+      <p id="live-sub">Season totals update as games go final.</p>
+      <div class="panel"><div class="league-scroll"><table><caption class="sr-only">Live season standings</caption><thead><tr><th scope="col"><span class="lbl-long">Rank</span><span class="lbl-short" aria-hidden="true">#</span></th><th scope="col">Player</th><th scope="col" class="num"><span class="lbl-long">Season W–L</span><span class="lbl-short" aria-hidden="true">Season</span></th><th scope="col" class="num"><span class="lbl-long">Behind leader</span><span class="lbl-short" aria-hidden="true">Back</span></th><th scope="col" class="num"><span class="lbl-long">This week W–L</span><span class="lbl-short" aria-hidden="true">Week</span></th></tr></thead><tbody id="live-body"></tbody></table></div></div>
+      <p class="legend mobile-legend">Season = season correct–wrong · Back = correct picks behind the leader · Week = this week correct–wrong</p>
+    </section>
     <nav class="league-links" aria-label="Jump to">
       <a class="league-link primary" href="/games/"><span class="ico" aria-hidden="true">🏈</span><span><strong id="link-games-title">View this week’s games</strong><small id="link-games-sub">Scores, revealed picks &amp; league consensus</small></span><span class="chev" aria-hidden="true">›</span></a>
       <a class="league-link" href="/standings/"><span class="ico" aria-hidden="true">🏆</span><span><strong>View standings</strong><small>Season race &amp; this week</small></span><span class="chev" aria-hidden="true">›</span></a>
@@ -70,6 +76,6 @@
   <noscript><p class="league-note section">Enable JavaScript to see current picks, results, and standings.</p></noscript>
   <script src="https://jerrykensinger.com/script.js"></script>
   <script src="/assets/league-core.js?v=20261024-app"></script>
-  <script src="/assets/home.js?v=20261024-app"></script>
+  <script src="/assets/home.js?v=20261025-live"></script>
 </body>
 </html>
