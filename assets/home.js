@@ -78,8 +78,9 @@
     }
   }
 
-  // Live standings appear only once every player has all picks in. They show
-  // win/loss counts from the feed's standings tabs, never individual picks.
+  // This week's live standings appear only once every player has all picks
+  // in. They show win/loss counts from the feed's weekly_records tab, never
+  // individual picks.
   function renderLive(d) {
     const section = $('live-standings');
     if (!section) return;
@@ -90,32 +91,34 @@
 
     const meta = d.meta;
     const body = $('live-body');
-    // Equal season records share a rank.
-    const season = rankRows([...d.season].sort((a, b) =>
-      (+b.correct || 0) - (+a.correct || 0) || (+a.wrong || 0) - (+b.wrong || 0) ||
-      (+a.rank || 99) - (+b.rank || 99)), p => `${+p.correct || 0}-${+p.wrong || 0}`);
-    if (!season.length) return messageRow(body, 'Season standings appear after the first completed week.', 5);
+    const title = $('live-title');
+    if (title) title.textContent = `Week ${meta.week} live standings`;
+    const total = +meta.games_total || 0, scored = +meta.games_scored || 0;
+    if (!scored || !d.weekly.length) {
+      $('live-sub').textContent = `No Week ${meta.week} games are final yet. Updates every five minutes.`;
+      return messageRow(body, 'Standings start when the first game goes final.', 5);
+    }
 
-    const week = new Map(d.weekly.map(p => [String(p.player), p]));
-    const lead = +season[0].correct || 0;
+    // Equal weekly records share a rank.
+    const week = rankRows([...d.weekly].sort((a, b) =>
+      (+b.correct || 0) - (+a.correct || 0) || (+a.wrong || 0) - (+b.wrong || 0)),
+      p => `${+p.correct || 0}-${+p.wrong || 0}`);
+    const lead = +week[0].correct || 0;
     body.replaceChildren();
-    season.forEach(p => {
+    week.forEach(p => {
       const tr = el('tr', null, p._rank === 1 ? 'is-leader' : '');
       tr.append(el('td', p._rank, 'num rank'));
       const th = el('th', p.player); th.scope = 'row'; tr.append(th);
-      tr.append(el('td', `${+p.correct || 0}–${+p.wrong || 0}`, 'num'));
+      tr.append(el('td', +p.correct || 0, 'num'));
+      tr.append(el('td', +p.wrong || 0, 'num'));
       const back = lead - (+p.correct || 0);
       tr.append(el('td', back ? String(back) : '—', 'num'));
-      const w = week.get(String(p.player));
-      tr.append(el('td', w ? `${+w.correct || 0}–${+w.wrong || 0}` : '—', 'num'));
       body.append(tr);
     });
 
-    const total = +meta.games_total || 0, scored = +meta.games_scored || 0;
-    $('live-sub').textContent = (scored
-      ? `Season totals include ${scored} of ${plural(total, 'game')} scored so far in Week ${meta.week}.`
-      : `No Week ${meta.week} games are final yet; season totals cover completed weeks.`) +
-      ' Updates every five minutes.';
+    $('live-sub').textContent = (scored === total
+      ? `Final · all ${plural(total, 'game')} scored.`
+      : `${scored} of ${plural(total, 'game')} scored so far.`) + ' Updates every five minutes.';
   }
 
   function renderLinks(d) {
