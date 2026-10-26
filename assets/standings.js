@@ -37,13 +37,17 @@
     const body = $('season-body');
     const sorted = [...rows].sort((a, b) => (+a.rank || 99) - (+b.rank || 99));
     body.replaceChildren();
-    if (!sorted.length) return messageRow(body, 'Season standings appear after the first completed week.', 6);
+    if (!sorted.length) return messageRow(body, 'Season standings appear after the first completed week.', 7);
+    // Correct picks behind whoever has the most.
+    const lead = Math.max(...sorted.map(p => +p.correct || 0));
     sorted.forEach(p => {
       const tr = el('tr', null, +p.rank === 1 ? 'is-leader' : '');
       tr.append(el('td', p.rank, 'num rank'));
       const th = el('th', p.player); th.scope = 'row'; tr.append(th);
       tr.append(el('td', p.correct, 'num'));
       tr.append(el('td', p.wrong, 'num'));
+      const back = lead - (+p.correct || 0);
+      tr.append(el('td', back ? String(back) : '—', 'num'));
       tr.append(el('td', `${p.win_pct}%`, 'num'));
       tr.append(el('td', p.weekly_wins, 'num'));
       body.append(tr);
@@ -153,7 +157,8 @@
       renderCompleted(d.history, d.season);
     },
     renderError() {
-      ['season-body', 'weekly-body'].forEach(id => messageRow($(id), 'Live data unavailable. Please try again shortly.', 6));
+      messageRow($('season-body'), 'Live data unavailable. Please try again shortly.', 7);
+      messageRow($('weekly-body'), 'Live data unavailable. Please try again shortly.', 6);
       messageRow($('completed-weekly-body'), 'Weekly records are temporarily unavailable.', 2);
     }
   });
